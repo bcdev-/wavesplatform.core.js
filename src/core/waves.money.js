@@ -30,6 +30,8 @@ var Currency = function(data) {
     this.precision = data.precision;
     if (data.roundingMode !== undefined)
         this.roundingMode = data.roundingMode;
+    if (data.gatewayURL !== undefined)
+        this.gatewayURL = data.gatewayURL;
 
     return this;
 };
@@ -41,28 +43,27 @@ Currency.WAV = new Currency({
 });
 
 Currency.BTC = new Currency({
-    id: '8LQW8f7P5d5PZM7GtZEBgaqRPGSzS3DfPuiXrURJ4AJS',
+    gatewayURL: 'http://127.0.0.1:6771',
     displayName: 'Bitcoin',
     symbol: 'B',
     precision: 8
 });
 
 Currency.USD = new Currency({
-    id: 'Ft8X1v1LTa1ABafufpaCWyVj8KkaxUWE6xBhW6sNFJck',
+    id: 'F4bwhjUwUM31AWj8FnnWbZfLhZEcdEMXBrRk3xzTHxJj',
+    gatewayURL: 'http://127.0.0.1:6771',
     displayName: 'US Dollar',
     symbol: '$',
     precision: 2
 });
 
 Currency.EUR = new Currency({
-    id: 'Gtb1WRznfchDnTh37ezoDTJ4wcoKaRsKqKjJjy7nm2zU',
     displayName: 'Euro',
     symbol: '€',
     precision: 2
 });
 
 Currency.CNY = new Currency({
-    id: 'DEJbZipbKQjwEiRjx2AqQFucrj5CZ3rAc4ZvFM8nAsoA',
     displayName: 'Chinese Yuan',
     symbol: '¥',
     precision: 2
