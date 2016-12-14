@@ -50,7 +50,7 @@ Currency.BTC = new Currency({
 });
 
 Currency.USD = new Currency({
-    id: 'F4bwhjUwUM31AWj8FnnWbZfLhZEcdEMXBrRk3xzTHxJj',
+    id: '6EZjjcsJGT35UGPCDUkcahJD33vXsVeZ6kxsCZ7jzoHw',
     gatewayURL: 'http://127.0.0.1:6771',
     displayName: 'US Dollar',
     symbol: '$',
