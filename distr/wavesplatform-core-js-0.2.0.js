@@ -757,8 +757,6 @@ var Currency = function(data) {
     this.precision = data.precision;
     if (data.roundingMode !== undefined)
         this.roundingMode = data.roundingMode;
-    if (data.gatewayURL !== undefined)
-        this.gatewayURL = data.gatewayURL;
 
     return this;
 };
@@ -770,16 +768,11 @@ Currency.WAV = new Currency({
 });
 
 Currency.BTC = new Currency({
-    gatewayURL: 'http://127.0.0.1:6771',
-    displayName: 'Bitcoin',
-    symbol: 'B',
-    precision: 8
+    id: 'CcvuevJVhadmRipPQgWkGDreUcdnRGWjBJ2ey7mzop9g'
 });
 
 Currency.USD = new Currency({
-    id: '6EZjjcsJGT35UGPCDUkcahJD33vXsVeZ6kxsCZ7jzoHw',
-    gatewayURL: 'http://127.0.0.1:6771',
-    displayName: 'US Dollar',
+    displayName: 'Generic Coin',
     symbol: '$',
     precision: 2
 });
@@ -1782,6 +1775,35 @@ Decimal.config({toExpNeg: -(Currency.WAV.precision + 1)});
                     return assetBroadcastApi.all('transfer').post(signedAssetTransferTransaction);
                 }
             };
+            
+            {
+                var currenciesToUpdate = [Currency.BTC, Currency.CNY, Currency.EUR, Currency.USD];
+				for (var i = 0, len = currenciesToUpdate.length; i < len; i++) {
+				  var currency = currenciesToUpdate[i];
+                    if (currency.id !== undefined) {
+                        var self = this;
+                        this.transactions.info(currency.id).then(function (response) {
+                            var id = response.assetId;
+                            var description = JSON.parse(response.description);
+                            console.log(id);
+                            console.log(description);
+                            var currenciesToUpdate2 = [Currency.BTC, Currency.CNY, Currency.EUR, Currency.USD];
+                            for (var i = 0, len = currenciesToUpdate.length; i < len; i++) {
+                                var currency = currenciesToUpdate[i];
+                                if (currency.id == id) {
+                                    currency.gatewayCommunicationKey = Base58.decode(description.gatewayCommunicationKey);
+                                    currency.gatewayURL = description.gatewayURL;
+                                    currency.displayName = description.displayName;
+                                    currency.symbol = description.symbol;
+                                    currency.precision = response.decimals;
+                                }
+                            }
+                        });
+//                        var a = this.transactions.info(currency.id);
+//                        console.log(a);
+                    }
+				}
+            }
         }]);
 })();
 

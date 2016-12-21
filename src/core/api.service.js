@@ -64,5 +64,34 @@
                     return assetBroadcastApi.all('transfer').post(signedAssetTransferTransaction);
                 }
             };
+            
+            {
+                var currenciesToUpdate = [Currency.BTC, Currency.CNY, Currency.EUR, Currency.USD];
+				for (var i = 0, len = currenciesToUpdate.length; i < len; i++) {
+				  var currency = currenciesToUpdate[i];
+                    if (currency.id !== undefined) {
+                        var self = this;
+                        this.transactions.info(currency.id).then(function (response) {
+                            var id = response.assetId;
+                            var description = JSON.parse(response.description);
+                            console.log(id);
+                            console.log(description);
+                            var currenciesToUpdate2 = [Currency.BTC, Currency.CNY, Currency.EUR, Currency.USD];
+                            for (var i = 0, len = currenciesToUpdate.length; i < len; i++) {
+                                var currency = currenciesToUpdate[i];
+                                if (currency.id == id) {
+                                    currency.gatewayCommunicationKey = Base58.decode(description.gatewayCommunicationKey);
+                                    currency.gatewayURL = description.gatewayURL;
+                                    currency.displayName = description.displayName;
+                                    currency.symbol = description.symbol;
+                                    currency.precision = response.decimals;
+                                }
+                            }
+                        });
+//                        var a = this.transactions.info(currency.id);
+//                        console.log(a);
+                    }
+				}
+            }
         }]);
 })();

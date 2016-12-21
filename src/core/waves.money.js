@@ -30,8 +30,6 @@ var Currency = function(data) {
     this.precision = data.precision;
     if (data.roundingMode !== undefined)
         this.roundingMode = data.roundingMode;
-    if (data.gatewayURL !== undefined)
-        this.gatewayURL = data.gatewayURL;
 
     return this;
 };
@@ -43,16 +41,11 @@ Currency.WAV = new Currency({
 });
 
 Currency.BTC = new Currency({
-    gatewayURL: 'http://127.0.0.1:6771',
-    displayName: 'Bitcoin',
-    symbol: 'B',
-    precision: 8
+    id: 'CcvuevJVhadmRipPQgWkGDreUcdnRGWjBJ2ey7mzop9g'
 });
 
 Currency.USD = new Currency({
-    id: '6EZjjcsJGT35UGPCDUkcahJD33vXsVeZ6kxsCZ7jzoHw',
-    gatewayURL: 'http://127.0.0.1:6771',
-    displayName: 'US Dollar',
+    displayName: 'Generic Coin',
     symbol: '$',
     precision: 2
 });
