@@ -768,7 +768,7 @@ Currency.WAV = new Currency({
 });
 
 Currency.BTC = new Currency({
-    id: 'CcvuevJVhadmRipPQgWkGDreUcdnRGWjBJ2ey7mzop9g'
+    id: '4zc4SLUyz4jQkdQXrYG7Ga2hmNc5Y1AYtQWxL7PNq34Z'
 });
 
 Currency.USD = new Currency({
